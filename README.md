@@ -1,4 +1,4 @@
-A base using React,Next and Prisma for MVP projects 
+Learning how to use next-auth 
 
 ## Install Dependencies
 ```bash

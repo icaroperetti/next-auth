@@ -17,3 +17,12 @@ model Task {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }
+
+model User {
+  id         String   @id @default(uuid())
+  name       String
+  email      String
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}

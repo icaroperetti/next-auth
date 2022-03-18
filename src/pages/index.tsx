@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { getSession, signIn, useSession } from "next-auth/react";
 import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
+import { BsFacebook } from "react-icons/bs";
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const session = await getSession({ req });
@@ -113,6 +114,9 @@ export default function Example() {
                 </button>
                 <button onClick={handleGoogleSignIn}>
                   <AiFillGoogleCircle size={40} />
+                </button>
+                <button>
+                  <BsFacebook size={30} />
                 </button>
               </div>
             </div>

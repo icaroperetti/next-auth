@@ -28,6 +28,10 @@ export default function Example() {
     signIn("google");
   }
 
+  function handleFacebookSignIn() {
+    signIn("facebook");
+  }
+
   return (
     <>
       <div className='h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
@@ -113,7 +117,7 @@ export default function Example() {
                 <button onClick={handleGoogleSignIn}>
                   <AiFillGoogleCircle size={40} />
                 </button>
-                <button>
+                <button onClick={handleFacebookSignIn}>
                   <BsFacebook size={36} />
                 </button>
               </div>

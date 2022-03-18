@@ -1,6 +1,29 @@
-import { AiFillGithub } from "react-icons/ai";
+import { GetServerSideProps } from "next";
+import { getSession, signIn, useSession } from "next-auth/react";
+import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/app",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+};
 
 export default function Example() {
+  const { data } = useSession();
+
+  function handleSignIn() {
+    signIn("github");
+  }
   return (
     <>
       <div className='h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
@@ -9,6 +32,7 @@ export default function Example() {
             <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
               Sign in to your account
             </h2>
+
             <p className='mt-2 text-center text-sm text-gray-600'></p>
           </div>
           <form className='mt-8 space-y-6' action='#' method='POST'>
@@ -79,9 +103,12 @@ export default function Example() {
               </button>
 
               <div className='github md-cols-6 pt-5 justify-center flex'>
-                <button>
+                <button onClick={handleSignIn}>
                   <AiFillGithub size={40} />
                 </button>
+                {/* <button>
+                  <AiFillGoogleCircle size={40} />
+                </button> */}
               </div>
             </div>
           </form>

@@ -1,15 +1,49 @@
-import { signOut } from "next-auth/react";
+import { Task } from "@prisma/client";
+import { FormEvent, useState } from "react";
 import { prisma } from "../../lib/prisma";
 
-export default function App({ data }) {
+type TaskProps = {
+  data: Task[];
+};
+
+export default function App({ data }: TaskProps) {
+  const [newTask, setNewTask] = useState("");
+
+  async function handleCreationTask(event: FormEvent) {
+    event.preventDefault();
+
+    await fetch("http://localhost:3000/api/tasks/create", {
+      method: "POST",
+      body: JSON.stringify({
+        title: newTask,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
   return (
     <div>
-      <h1 className=''>Hello World</h1>
-      <button className='' onClick={() => signOut()}>
+      {/* <button className='' onClick={() => signOut()}>
         Log out
-      </button>
+      </button> */}
       <p className='text-lg'>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+        <ul>
+          {data.map((task) => (
+            <li key={task.id} className='text-4xl'>
+              {task.title}
+            </li>
+          ))}
+        </ul>
+        <form onSubmit={handleCreationTask}>
+          <input
+            type='text'
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
+          />
+          <button type='submit'>New Task</button>
+        </form>
       </p>
     </div>
   );
@@ -22,7 +56,6 @@ export const getServerSideProps = async () => {
     return {
       id: task.id,
       title: task.title,
-      description: task.description,
       isDone: task.isDone,
       date: task.created_at.toISOString(),
     };

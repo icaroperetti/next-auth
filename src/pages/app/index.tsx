@@ -1,4 +1,5 @@
 import { Task } from "@prisma/client";
+import { signOut } from "next-auth/react";
 import { FormEvent, useState } from "react";
 import { prisma } from "../../lib/prisma";
 
@@ -25,9 +26,9 @@ export default function App({ data }: TaskProps) {
 
   return (
     <div>
-      {/* <button className='' onClick={() => signOut()}>
+      <button className='' onClick={() => signOut()}>
         Log out
-      </button> */}
+      </button>
       <p className='text-lg'>
         <ul>
           {data.map((task) => (

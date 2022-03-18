@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { getSession, signIn, useSession } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
 
@@ -20,8 +20,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 };
 
 export default function Example() {
-  const { data } = useSession();
-
   function handleSignIn() {
     signIn("github");
   }
@@ -107,8 +105,8 @@ export default function Example() {
               >
                 Sign in
               </button>
-
-              <div className='github md-cols-6 pt-5 justify-center flex'>
+              <p className='text-center pt-5 pb-5 font-bold'>Or Sign In With</p>
+              <div className='github md-cols-6 pt-5 justify-center flex space-x-12'>
                 <button onClick={handleSignIn}>
                   <AiFillGithub size={40} />
                 </button>
@@ -116,7 +114,7 @@ export default function Example() {
                   <AiFillGoogleCircle size={40} />
                 </button>
                 <button>
-                  <BsFacebook size={30} />
+                  <BsFacebook size={36} />
                 </button>
               </div>
             </div>

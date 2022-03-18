@@ -1,4 +1,4 @@
-Learning how to use next-auth 
+Learning how to use next-auth to authenticate
 
 ## Install Dependencies
 ```bash
